@@ -21,7 +21,7 @@ const ErrorModal = (props) => {
         </p>
       </div>
       <footer className ={styles.actions}>
-        <Button>Close</Button>
+        <Button onClick = {props.onClick}>Close</Button>
       </footer>
     </Card>
     </div>
