@@ -11,6 +11,8 @@ const AddUser = (props) => {
   // States
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
+   //Not defined - Nothing happens
+  const [enteredError, setEnteredError] = useState();
 
   //Handlers
   const usernameChangeHandler = (event) => {
@@ -24,14 +26,21 @@ const AddUser = (props) => {
   const addUserHandler = (event) => {
     event.preventDefault();
     // the 'plus' converts string to number
-    if (
-      enteredUsername.trim().length === 0 ||
-      enteredAge.trim().length === 0 ||
-      +enteredAge < 1
-    ) {
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      setEnteredError({
+        title: "Ooops! Invalid Input",
+        message:
+          "Something went wrong with the form. Please, enter a valid name and age (non-empty values)",
+      });
       return;
     }
 
+    if (+enteredAge < 1) {
+      setEnteredError({
+        title: "Ooops! Invalid Age",
+        message:"Please enter a valid age (above 0)"
+      });
+    }
     props.onAddUser(enteredUsername, enteredAge);
     //Reset
     setEnteredUsername("");
@@ -40,7 +49,8 @@ const AddUser = (props) => {
 
   return (
     <div>
-      <ErrorModal title="Upss" message="Something went wrong. Try again" />
+      {/*If entered error is defined, we show the ErrorModal, else, we don't*/}
+      {enteredError && <ErrorModal title="Upss" message="Something went wrong. Try again" />}
       <Card className={styles.input}>
         {/*Form*/}
         <form onSubmit={addUserHandler}>
