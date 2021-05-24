@@ -18,24 +18,21 @@ const AddUser = (props) => {
 
   const ageChangeHandler = (event) => {
     return setEnteredAge(event.target.value);
-    
   };
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    const enteredData = [enteredUsername, enteredAge];
-    if(enteredUsername.trim().length === 0 || enteredAge.trim().length === 0  ){
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
       return;
     }
     // the 'plus' converts string to number
-    if(+enteredAge<1){
+    if (+enteredAge < 1) {
       return;
     }
-    console.log(enteredData);
+    props.onAddUser(enteredUsername, enteredAge);
     //Reset
     setEnteredUsername("");
     setEnteredAge("");
-
   };
 
   return (
