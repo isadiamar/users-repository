@@ -5,6 +5,7 @@ import styles from "./AddUser.module.css";
 import Card from "../../UI/Card";
 import Button from "../../UI/Button";
 import ErrorModal from "../../UI/ErrorModal";
+import Wrapper from "../../Helpers/Wrapper";
 
 //CardInput Component
 const AddUser = (props) => {
@@ -49,13 +50,17 @@ const AddUser = (props) => {
 
   const closeErrorHandler = (event) => {
     setEnteredError();
-  }
+  };
 
   return (
-    <div>
+    <Wrapper>
       {/*If entered error is defined, we show the ErrorModal, else, we don't*/}
       {enteredError && (
-        <ErrorModal title={enteredError.title} message={enteredError.message} onClick={closeErrorHandler} />
+        <ErrorModal
+          title={enteredError.title}
+          message={enteredError.message}
+          onClick={closeErrorHandler}
+        />
       )}
       <Card className={styles.input}>
         {/*Form*/}
@@ -78,7 +83,7 @@ const AddUser = (props) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 };
 
